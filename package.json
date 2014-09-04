@@ -1,0 +1,24 @@
+{
+  "name": "much-todo-about-nothing",
+  "version": "0.0.0",
+  "description": "an simple todo list mananger using node.js, Express Backbone & Fondation",
+  "main": "src/server/index.js",
+  "dependencies": {
+    "connect": "^3.1.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rewiredpictures/much-todo-about-nothing.git"
+  },
+  "keywords": [
+    "todo",
+    "node.js",
+    "express",
+    "backbone",
+    "bootstrap"
+  ],
+  "author": "Adam Sax",
+  "license": "ISC",
+  "homepage": "https://github.com/rewiredpictures/much-todo-about-nothing"
+}
