@@ -12,6 +12,7 @@
     <script id="list-selector" type="text/template">
         <header>
             much todo about nothing
+            <button id="add"><span class="glyphicon glyphicon-plus"></button>
         </header>
         <ul id="list-selector-list" class="list-group">
         </ul>
@@ -23,10 +24,11 @@
 
     <script id="todo-list" type="text/template">
         <h2><input type="text" name="name" value="<%= name %>"></h2>
+        <a id="delete">delete list</a>
         <div class="autsave"></div>
         <ul id="todo-list" class="list-group">
         </ul>
-        <button id="new" class="btn btn-lg"> <span class="glyphicon glyphicon-plus"></span> todo</button>
+        <button id="new" class="btn btn-lg"><span class="glyphicon glyphicon-plus"></span> todo</button>
     </script>
 
     <script id="todo-list-item" type="text/template">

@@ -33,6 +33,12 @@ define([
                 this.todoList.setList(listId);
             }, this);
 
+            this.todoList.on("delete", function(list) {
+              lists.remove(list);
+              list.destroy();
+              this.selector.setList(lists.at(lists.length-1).get('id'));
+            }, this);
+
             lists.fetch();
         },
 

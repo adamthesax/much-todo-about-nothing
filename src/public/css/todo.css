@@ -8,6 +8,7 @@ body {
     top: 0px;
     bottom: 0px;
     width: 200px;
+    overflow-y: auto;
 }
 
 #content {

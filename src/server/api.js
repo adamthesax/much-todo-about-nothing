@@ -74,5 +74,20 @@ api.get('/list/:id', function (req, res) {
     res.send(list);
 });
 
+api.delete('/list/:id', function (req, res) {
+    var list = _.findWhere(lists, {id: req.params.id});
+
+    if (_.isUndefined(list)) {
+        res.status(404).send({"error": "cannot find list " + req.params.id})
+        return;
+    }
+
+    lists = _.without(lists, list);
+    save();
+
+    res.setHeader('Content-Type', 'application/json');
+    res.end();
+});
+
 module.exports = api;
 

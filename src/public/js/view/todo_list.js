@@ -23,7 +23,10 @@ define([
         tagName: "ul",
 
         events: {
-            "click button#new" : "addTodoItem",
+            "click #new" : "addTodoItem",
+            "click #delete" : function() {
+                this.trigger("delete", this.model);
+            },
             "change": "onChange"
         },
 

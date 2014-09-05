@@ -11,7 +11,7 @@ define([
         urlRoot: '/api/list',
         defaults: {
             name: "My New List",
-            items: new Backbone.Collection()
+            items: new Backbone.Collection([new ListItemModel()])
         },
 
         events: {
