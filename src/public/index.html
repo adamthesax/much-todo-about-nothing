@@ -10,7 +10,9 @@
 </head>
 <body>
     <script id="list-selector" type="text/template">
-        <header>My Lists</header>
+        <header>
+            much todo about nothing
+        </header>
         <ul id="list-selector-list" class="list-group">
         </ul>
     </script>
@@ -20,6 +22,8 @@
     </script>
 
     <script id="todo-list" type="text/template">
+        <h2><input type="text" name="name" value="<%= name %>"></h2>
+        <div class="autsave"></div>
         <ul id="todo-list" class="list-group">
         </ul>
         <button id="new" class="btn btn-lg"> <span class="glyphicon glyphicon-plus"></span> todo</button>

@@ -23,7 +23,8 @@ define([
         tagName: "ul",
 
         events: {
-            "click button#new" : "addTodoItem"
+            "click button#new" : "addTodoItem",
+            "change": "onChange"
         },
 
         onRender: function() {
@@ -37,21 +38,37 @@ define([
         },
 
         setList: function(listId) {
-
             Backbone.history.navigate("/list/" + listId);
+
+            if (!_.isUndefined(this.model))
+                this.model.off("autosave", this.onAutosave);
+
             this.model = new ListModel({id: listId});
             this.model.once("sync", function() {
-                this.collection = new Backbone.Collection(this.model.get("items"));
+                this.collection = this.model.get("items");
                 this._initialEvents();
                 this.render();
             }, this);
+            this.model.on("autosave", this.onAutosave, this);
             this.model.fetch();
         },
 
+        onAutosave: function() {
+            alert("got saving!");
+        },
 
         addTodoItem: function() {
+            // add a new model to the collection
             this.collection.add(new ListItemModel());
+
+            // focus on our new input
+            this.$el.find('li:last-child>input[type="text"]').focus();
+        },
+
+        onChange: function(event) {
+            this.model.set(event.target.name, event.target.value);
         }
+
     });
 
     return TodoList;

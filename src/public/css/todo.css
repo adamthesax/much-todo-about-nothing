@@ -10,6 +10,10 @@ body {
     width: 200px;
 }
 
+#content {
+    padding: 0px 20px;
+}
+
 input[type="text"] {
     background: transparent;
     border: 0px;

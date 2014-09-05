@@ -38,7 +38,7 @@ define([
 
         showList: function(id) {
             this.index();
-            this.todoList.setList(id);
+            this.selector.setList(id);
         },
 
         show404: function() {

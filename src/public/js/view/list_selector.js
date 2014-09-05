@@ -17,7 +17,7 @@ define([
 
         events: {
             "click": function() {
-                this.trigger("select", this);
+                this.trigger("select", this.model.get("id"));
             }
         }
     })
@@ -28,13 +28,17 @@ define([
         childViewContainer: "ul#list-selector-list",
 
         onAddChild: function(childView) {
-            childView.on("select", this.listSelected, this);
+            childView.$el.attr("id", childView.model.get("id"));
+            childView.on("select", this.setList, this);
+            if (!_.isUndefined(this.selectedId) && childView.model.get("id") == this.selectedId)
+                childView.$el.addClass("active");
         },
 
-        listSelected: function(listItemView) {
+        setList: function(listId) {
+           this.selectedId = listId;
            this.$el.find("li.active").removeClass("active");
-           listItemView.$el.addClass("active");
-           this.trigger("select", listItemView.model.get("id"));
+           this.$el.find("#"+listId).addClass("active");
+           this.trigger("select", listId);
         }
     });
 
