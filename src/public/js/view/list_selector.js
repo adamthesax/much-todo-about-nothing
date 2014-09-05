@@ -9,7 +9,7 @@ define([
 ], function ($, _, Backbone, ListModel) {
 
     var ListItem = Backbone.Marionette.ItemView.extend({
-        template: _.template("<%= name %>"), // "script#list-selector-item"
+        template: "script#list-selector-item",
         tagName: "li",
 
         onRender: function() {
@@ -33,8 +33,13 @@ define([
         },
 
         onAddChild: function(childView) {
+            // when a child is added set it's DOM id to the list id
             childView.$el.attr("id", childView.model.get("id"));
+
+            // wire up selection event
             childView.on("select", this.setList, this);
+
+            // if the view we are adding is selected, add the active class
             if (!_.isUndefined(this.selectedId) && childView.model.get("id") == this.selectedId)
                 childView.$el.addClass("active");
         },

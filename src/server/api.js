@@ -1,11 +1,14 @@
-var express = require('express');
-var _ = require("underscore");
-var uuid = require('node-uuid');
-var fs = require('fs');
-var path = require('path');
+var express = require('express'),
+    _ = require("underscore"),
+    uuid = require('node-uuid'),
+    fs = require('fs'),
+    path = require('path');
 
 var jsonPath = path.resolve(__dirname, "../../data/lists.json");
-var lists =  require(jsonPath);
+var lists = [];
+if (fs.existsSync(jsonPath)) {
+    lists =  require(jsonPath);
+}
 
 function save() {
     fs.writeFile(jsonPath, JSON.stringify(lists, null, '\t'), function (err) {

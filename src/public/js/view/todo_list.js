@@ -19,9 +19,7 @@ define([
 
         events: {
             "click #new" : "addTodoItem",
-            "click #delete" : function() {
-                this.trigger("delete", this.model);
-            },
+            "click #delete" : "deleteList",
             'change input[name="name"]': "onNameChange",
             "keydown input.todo" : "onKeyDown"
         },
@@ -138,6 +136,10 @@ define([
                     break;
             }
             return true;
+        },
+
+        deleteList: function() {
+            this.trigger("delete", this.model);
         }
 
     });

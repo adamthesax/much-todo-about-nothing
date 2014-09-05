@@ -1,9 +1,12 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var path = require('path');
+var express = require('express'),
+    bodyParser = require('body-parser'),
+    path = require('path'),
+    morgan = require("morgan");
 
-app.use(bodyParser.json())
+var app = express();
+
+app.use(morgan('combined'));
+app.use(bodyParser.json());
 app.use('/api', require('./api'));
 
 var publicPath = path.resolve(__dirname, "../public");
@@ -12,4 +15,5 @@ app.get('*', function(req,res) {
     res.sendFile(publicPath + "/index.html");
 });
 
+console.log("http://localhost:3000");
 app.listen(3000);
