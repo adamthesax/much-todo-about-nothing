@@ -9,13 +9,33 @@ define([
 
     var ListItem = Backbone.Marionette.ItemView.extend({
         template: _.template("<%= name %>"), // "script#list-selector-item"
-        tagName: "li"
+        tagName: "li",
+
+        onRender: function() {
+            this.$el.addClass("list-group-item");
+        },
+
+        events: {
+            "click": function() {
+                this.trigger("select", this);
+            }
+        }
     })
 
     var ListSelector = Backbone.Marionette.CompositeView.extend({
         template: "script#list-selector",
-        itemView: ListItem,
-        itemViewContainer: "ul#list-selector-list"
+        childView: ListItem,
+        childViewContainer: "ul#list-selector-list",
+
+        onAddChild: function(childView) {
+            childView.on("select", this.listSelected, this);
+        },
+
+        listSelected: function(listItemView) {
+           this.$el.find("li.active").removeClass("active");
+           listItemView.$el.addClass("active");
+           this.trigger("select", listItemView.model.get("id"));
+        }
     });
 
     return ListSelector;

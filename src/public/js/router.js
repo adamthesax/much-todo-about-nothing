@@ -5,8 +5,9 @@ define([
     'underscore',
     'backbone',
     'view/list_selector',
+    'view/todo_list',
     'collection/lists'
-], function ($, _, Backbone, ListSelectorView, ListsCollection)  {
+], function ($, _, Backbone, ListSelectorView, TodoListView, ListsCollection)  {
 
     var Router = Backbone.Router.extend({
 
@@ -18,14 +19,26 @@ define([
 
         index: function() {
             var lists = new ListsCollection();
-            new ListSelectorView({
+
+            this.selector = new ListSelectorView({
                 el: "#sidebar",
                 collection: lists
             }).render();
+
+            this.todoList = new TodoListView({
+               el: "#content"
+            }).render();
+
+            this.selector.on("select", function(listId) {
+                this.todoList.setList(listId);
+            }, this);
+
             lists.fetch();
         },
 
         showList: function(id) {
+            this.index();
+            this.todoList.setList(id);
         },
 
         show404: function() {

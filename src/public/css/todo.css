@@ -1,13 +1,11 @@
 body {
-    padding-left: 100px;
+    padding-left: 200px;
 }
 
 #sidebar {
     position: fixed;
-    background: black;
-    color: white;
     left: 0px;
     top: 0px;
     bottom: 0px;
-    width: 100px;
+    width: 200px;
 }
