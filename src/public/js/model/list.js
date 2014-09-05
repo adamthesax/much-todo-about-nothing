@@ -15,11 +15,10 @@ define([
         },
 
         autosave: function() {
-            this.trigger("autosave:start");
-
             if (this.cooldown) clearTimeout(this.cooldown);
 
             this.cooldown = setTimeout($.proxy(function() {   //calls click event after a certain time
+                this.trigger("autosave:start");
                 this.save(this.attributes, {
                     success: $.proxy(function(model, response){
                         this.trigger("autosave:success");

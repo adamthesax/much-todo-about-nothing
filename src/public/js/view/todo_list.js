@@ -44,10 +44,10 @@ define([
                 // focus on the previous to do input
                 if (selectPrevious) {
                     var itemIndex = this.collection.indexOf(model);
-                    var previousInput = this.children.findByIndex(itemIndex-1).$el.find("input.todo");
-                    previousInput.focus();
-                    // stupid trick to select the end of the input
-                    previousInput.val(previousInput.val());
+                    if (itemIndex > 0) {
+                        var previousInput = this.children.findByIndex(itemIndex-1).$el.find("input.todo");
+                        this.selectPreviousItem(previousInput);
+                    }
                 }
 
                 // remove the view
@@ -105,14 +105,44 @@ define([
             this.trigger("change");
         },
 
+        selectPreviousItem: function(item) {
+            var prev = item || $(document.activeElement).parent().prev().find('input[type="text"]')
+
+            if (prev.length > 0) {
+                prev.focus();
+                prev.val(prev.val());
+                return true;
+            }
+            return false;
+        },
+
+        selectNextItem: function(item) {
+            var next = item || $(document.activeElement).parent().next().find('input[type="text"]')
+
+            if (next.length > 0) {
+                next.focus();
+                next.val(next.val());
+                return true;
+            }
+            return false;
+        },
+
         onKeyDown: function(event) {
             switch(event.which) {
                 case 13:    // enter
-                    this.addTodoItem();
-                    return false;
+                    if(!this.selectNextItem())
+                        this.addTodoItem();
                     break;
 
+                case 38: // up arrow
+                    this.selectPreviousItem();
+                    break;
+
+                case 40:
+                    this.selectNextItem();
+                    break;
             }
+            return true;
         }
 
     });
