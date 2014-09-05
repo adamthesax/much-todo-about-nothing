@@ -5,21 +5,13 @@ define([
     'underscore',
     'backbone',
     'model/list',
+    'view/todo_list_item',
     'marionette'
-], function ($, _, Backbone, ListModel) {
+], function ($, _, Backbone, ListModel, TodoListItem) {
 
     var NoListView = Backbone.Marionette.ItemView.extend({
        template: _.template("you have no items!")
     });
-
-    var TodoListItem = Backbone.Marionette.ItemView.extend({
-        template: _.template("<%= value %>"), // "script#list-selector-item"
-        tagName: "li",
-
-        onRender: function() {
-            this.$el.addClass("list-group-item");
-        }
-    })
 
     var TodoList = Backbone.Marionette.CollectionView.extend({
         childView: TodoListItem,

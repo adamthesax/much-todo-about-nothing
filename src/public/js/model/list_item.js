@@ -6,14 +6,13 @@ define([
     'backbone'
 ], function ($, _, Backbone) {
 
-    var List = Backbone.Model.extend({
-        urlRoot: '/api/list',
+    var ListItem = Backbone.Model.extend({
         defaults: {
-            name: "My New List",
-            items: []
+            value: "",
+            checked: false
         }
     })
 
-    return List;
+    return ListItem;
 
 });

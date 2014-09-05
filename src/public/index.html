@@ -16,8 +16,16 @@
     </script>
 
     <script id="list-selector-item" type="text/template">
-       <%= name %>
+        <%= name %>
     </script>
+
+    <script id="todo-list-item" type="text/template">
+        <div class="checkbox">
+            <input type="checkbox" name="checked" <%= checked ? "checked" : "" %>>
+            <input name="value" value="<%= value%>">
+        </div>
+    </script>
+
 
     <div id="sidebar">
     </div>
