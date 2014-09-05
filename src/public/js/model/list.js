@@ -11,7 +11,7 @@ define([
         urlRoot: '/api/list',
         defaults: {
             name: "Untitled List",
-            items: new Backbone.Collection()
+            items: new Backbone.Collection(new ListItemModel())
         },
 
         autosave: function() {
@@ -38,9 +38,8 @@ define([
         parse: function(response, options) {
             if (options && !options.parse) return;
 
-            // if we don't have items (aka we are parsing without defaults)
-           this.set("items", new Backbone.Collection(response.items));
-           this.get("items").on("remove change", this.autosave, this);
+            this.set("items", new Backbone.Collection(response.items));
+            this.get("items").on("remove change", this.autosave, this);
             delete response.items;
 
             return response;

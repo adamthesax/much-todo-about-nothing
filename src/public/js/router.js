@@ -41,7 +41,12 @@ define([
             this.todoList.on("delete", function(list) {
               this.lists.remove(list);
               list.destroy();
-              this.selector.setList(this.lists.at(this.lists.length-1).get('id'));
+              if (this.lists.length > 0) {
+                  this.selector.setList(this.lists.at(this.lists.length-1).get('id'));
+              } else {
+                  this.todoList.collection = null;
+                  this.todoList.render();
+              }
             }, this);
 
             // when a list changes its name we should regrab out list

@@ -8,18 +8,13 @@ define([
     'model/list_item',
     'view/todo_list_item',
     'marionette',
-    'jquery-ui',
+    'jquery-ui'
 ], function ($, _, Backbone, ListModel, ListItemModel, TodoListItem) {
-
-    var NoListView = Backbone.Marionette.ItemView.extend({
-       template: _.template("you have no items!")
-    });
 
     var TodoList = Backbone.Marionette.CompositeView.extend({
         template: "script#todo-list",
         childView: TodoListItem,
         childViewContainer: "ul.list-group",
-        emptyView: NoListView,
         tagName: "ul",
 
         events: {
@@ -36,7 +31,7 @@ define([
         },
 
         getTemplate: function() {
-            return _.isUndefined(this.collection) ? "script#empty-lists" : "script#todo-list";
+            return this.collection ?"script#todo-list" : "script#empty-lists";
         },
 
         onAddChild: function(childView) {
