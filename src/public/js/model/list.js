@@ -14,13 +14,9 @@ define([
             items: new Backbone.Collection([new ListItemModel()])
         },
 
-        events: {
-            "change" : "autosave"
-        },
-
         autosave: function() {
             this.trigger("autosave:start");
-            this.save(this.attributes, {
+           this.save(this.attributes, {
                 success: $.proxy(function(model, response){
                     this.trigger("autosave:complete");
                 }, this),
@@ -28,6 +24,10 @@ define([
                     this.trigger("autosave:failure");
                 }, this)
             });
+        },
+
+        initialize: function(options) {
+           this.on("change:name", this.autosave, this);
         },
 
         parse: function(response) {

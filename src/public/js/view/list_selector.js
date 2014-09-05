@@ -29,7 +29,7 @@ define([
         childViewContainer: "ul#list-selector-list",
 
         events: {
-            "click button#add" : "addList"
+            "click #new" : "newList"
         },
 
         onAddChild: function(childView) {
@@ -46,7 +46,7 @@ define([
            this.trigger("select", listId);
         },
 
-        addList: function() {
+        newList: function() {
             var list = new ListModel();
             list.save({}, {
                 success: $.proxy(function() {

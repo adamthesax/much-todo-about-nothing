@@ -70,6 +70,7 @@ define([
 
         onChange: function(event) {
             this.model.set(event.target.name, event.target.value);
+            this.trigger("change");
         }
 
     });

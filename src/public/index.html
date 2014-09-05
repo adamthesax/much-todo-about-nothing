@@ -11,8 +11,9 @@
 <body>
     <script id="list-selector" type="text/template">
         <header>
-            much todo about nothing
-            <button id="add"><span class="glyphicon glyphicon-plus"></button>
+            <h1>much todo about nothing</h1>
+            <hr/>
+            <a id="new">new list</a>
         </header>
         <ul id="list-selector-list" class="list-group">
         </ul>
@@ -23,18 +24,26 @@
     </script>
 
     <script id="todo-list" type="text/template">
-        <h2><input type="text" name="name" value="<%= name %>"></h2>
-        <a id="delete">delete list</a>
-        <div class="autsave"></div>
-        <ul id="todo-list" class="list-group">
-        </ul>
-        <button id="new" class="btn btn-lg"><span class="glyphicon glyphicon-plus"></span> todo</button>
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-md-8">
+                    <h2><input type="text" style="width: 100%" name="name" value="<%= name %>"></h2>
+                </div>
+                <div class="col-md-4">
+                    <a id="delete">delete list</a>
+                </div>
+            </div>
+            <ul id="todo-list row" class="list-group">
+            </ul>
+            <button id="new" class="btn btn-lg"><span class="glyphicon glyphicon-plus"></span> todo</button>
+        </div>
     </script>
 
     <script id="todo-list-item" type="text/template">
         <input type="checkbox" name="checked" <%= checked ? "checked" : "" %>>
         <input type="text" name="value" value="<%= value%>">
-        <div id="remove" class="badge glyphicon glyphicon-remove-sign">&nbsp;</div>
+        <a id="remove" class="badge small">remove</a>
     </script>
 
 
@@ -43,7 +52,6 @@
 
     <div>
     <div id="content">
-        content goes here
     </div>
 
 
