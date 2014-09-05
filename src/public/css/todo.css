@@ -37,5 +37,6 @@ input[type="text"] {
     outline: none;
 }
 input[type="text"]:focus {
-    border-bottom: 1px red dotted;
+    border-bottom: 1px #428bca dotted;
+    color: #428bca;
 }

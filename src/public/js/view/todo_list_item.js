@@ -13,9 +13,8 @@ define([
 
         events: {
             "change" : "onChange",
-            "click #remove" : function() {
-                this.trigger("remove", this.model);
-            }
+            "click #remove" : "onRemove",
+            "keydown input" : "onKeyDown"
         },
 
         onRender: function() {
@@ -25,8 +24,26 @@ define([
         onChange: function(event) {
             if (event.target.type == "checkbox") event.target.value = event.target.checked;
             this.model.set(event.target.name, event.target.value);
+        },
+
+        onRemove: function() {
+            this.trigger("remove", this.model);
+        },
+
+        onKeyDown: function(event) {
+            switch(event.which) {
+                case 46: // delete
+                case 8: // backspace
+                    if (event.target.value.length == 0) {
+                        this.trigger("remove", this.model, true);
+                        return false;
+                    }
+            }
         }
-    });
+
+
+
+   });
 
     return TodoListItem;
 });

@@ -32,7 +32,7 @@ define([
 
         parse: function(response) {
             response.items = new Backbone.Collection(response.items);
-            response.items.on("change", this.autosave, this);
+            response.items.on("add remove change", this.autosave, this);
             return response;
         }
     })

@@ -12,10 +12,12 @@
     <script id="list-selector" type="text/template">
         <header>
             <h1>much todo about nothing</h1>
-            <hr/>
-            <a id="new">new list</a>
+
         </header>
         <ul id="list-selector-list" class="list-group">
+            <li class="list-group-item disabled" style="text-align: right">
+                <a id="new">+ new list</a>
+            </li>
         </ul>
     </script>
 
@@ -36,13 +38,13 @@
             </div>
             <ul id="todo-list row" class="list-group">
             </ul>
-            <button id="new" class="btn btn-lg"><span class="glyphicon glyphicon-plus"></span> todo</button>
+            <h4><a id="new">+ new todo</a></h4>
         </div>
     </script>
 
     <script id="todo-list-item" type="text/template">
         <input type="checkbox" name="checked" <%= checked ? "checked" : "" %>>
-        <input type="text" name="value" value="<%= value%>">
+        <input type="text" name="value" value="<%= value%>" class="todo">
         <a id="remove" class="badge small">remove</a>
     </script>
 

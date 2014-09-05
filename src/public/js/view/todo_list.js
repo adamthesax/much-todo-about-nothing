@@ -27,7 +27,8 @@ define([
             "click #delete" : function() {
                 this.trigger("delete", this.model);
             },
-            "change": "onChange"
+            'change input[name="name"]': "onNameChange",
+            "keydown input.todo" : "onKeyDown"
         },
 
         onRender: function() {
@@ -35,8 +36,19 @@ define([
         },
 
         onAddChild: function(childView) {
-            childView.on("remove", function(model) {
-               this.collection.remove(model);
+            childView.on("remove", function(model, selectPrevious) {
+                // focus on the previous to do input
+                if (selectPrevious) {
+                    var itemIndex = this.collection.indexOf(model);
+                    var previousInput = this.children.findByIndex(itemIndex-1).$el.find("input.todo");
+                    previousInput.focus();
+
+                    // stupid trick to select the end of the input
+                    previousInput.val(previousInput.val());
+                }
+
+                // remove the view
+                this.collection.remove(model);
             }, this);
         },
 
@@ -68,9 +80,18 @@ define([
             this.$el.find('li:last-child>input[type="text"]').focus();
         },
 
-        onChange: function(event) {
+        onNameChange: function(event) {
             this.model.set(event.target.name, event.target.value);
             this.trigger("change");
+        },
+
+        onKeyDown: function(event) {
+            switch(event.which) {
+                case 13:    // enter
+                    this.addTodoItem();
+                    break;
+
+            }
         }
 
     });
