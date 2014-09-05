@@ -17,7 +17,7 @@ define([
             "*404" : "show404"
         },
 
-        initialize: function() {
+        setupPage: function() {
             // create our lists collection
             this.lists = new ListsCollection();
 
@@ -54,6 +54,7 @@ define([
         },
 
         index: function() {
+            this.setupPage();
             if(this.lists.length > 0) {
               this.selector.setList(this.selector.at(0).get("id"));
             } else {
@@ -64,10 +65,14 @@ define([
         },
 
         showList: function(id) {
+            this.setupPage();
             this.selector.setList(id);
         },
 
         show404: function() {
+            document.title = "Not Found";
+            $("#sidebar").remove();
+            $("#content").html($("script#404").text());
         }
     });
 
