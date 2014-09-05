@@ -97,7 +97,7 @@ define([
             this.collection.add(new ListItemModel());
 
             // focus on our new input
-            this.$el.find('li:last-child>input[type="text"]').focus();
+            this.$el.find('li:last-child input[type="text"]').focus();
         },
 
         onNameChange: function(event) {

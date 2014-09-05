@@ -14,7 +14,7 @@ define([
             items: new Backbone.Collection()
         },
 
-        autosave: function(a, b, c) {
+        autosave: function() {
             this.trigger("autosave:start");
             this.save(this.attributes, {
                 success: $.proxy(function(model, response){
@@ -22,7 +22,8 @@ define([
                 }, this),
                 error: $.proxy(function(model, response){
                     this.trigger("autosave:failure");
-                }, this)
+                }, this),
+                parse: false
             });
         },
 
@@ -34,17 +35,12 @@ define([
         },
 
 
-        parse: function(response) {
+        parse: function(response, options) {
+            if (options && !options.parse) return;
+
             // if we don't have items (aka we are parsing without defaults)
-            if (!this.has("items")) {
-               this.set("items", new Backbone.Collection(response.items));
-               this.get("items").on("remove change", this.autosave, this);
-            // otherwise if this is the first data set we are getting back
-            } else if (this.get("items").length == 0)  {
-               // load up the data
-               this.get("items").reset(response.items);
-            }
-            // remove the items from the response for the rest of the chain
+           this.set("items", new Backbone.Collection(response.items));
+           this.get("items").on("remove change", this.autosave, this);
             delete response.items;
 
             return response;
