@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="/css/todo.css">
 </head>
 <body>
+    <script id="empty-lists" type="text/template">
+        You have no todo lists <a>add one now</a>
+        <ul id="list-selector-list" class="list-group"></ul>
+    </script>
+
     <script id="list-selector" type="text/template">
         <header>
             <h1>much todo about nothing</h1>
@@ -39,6 +44,7 @@
             <ul id="todo-list row" class="list-group">
             </ul>
             <h4><a id="new">+ new todo</a></h4>
+            <div id="autosave-notification" class="notification"></div>
         </div>
     </script>
 
@@ -49,12 +55,8 @@
     </script>
 
 
-    <div id="sidebar">
-    </div>
-
-    <div>
-    <div id="content">
-    </div>
+    <section id="sidebar"></section>
+    <section id="content"></section>
 
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.js" data-main="/js/main"></script>

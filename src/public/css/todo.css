@@ -3,7 +3,7 @@ body {
 }
 
 header {
-    background-color: black;
+    background-color: #333;
     color: white;
 
 }
@@ -39,4 +39,12 @@ input[type="text"] {
 input[type="text"]:focus {
     border-bottom: 1px #428bca dotted;
     color: #428bca;
+}
+
+.notification {
+    position: absolute;
+    top: 6px;
+    right: 20px;
+    width: 100px;
+    text-align: center;
 }

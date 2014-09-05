@@ -16,18 +16,25 @@ define([
 
         autosave: function() {
             this.trigger("autosave:start");
-           this.save(this.attributes, {
-                success: $.proxy(function(model, response){
-                    this.trigger("autosave:complete");
-                }, this),
-                error: $.proxy(function(model, response){
-                    this.trigger("autosave:failure");
-                }, this)
-            });
+
+            if (this.cooldown) clearTimeout(this.cooldown);
+
+            this.cooldown = setTimeout($.proxy(function() {   //calls click event after a certain time
+                this.save(this.attributes, {
+                    success: $.proxy(function(model, response){
+                        this.trigger("autosave:success");
+                    }, this),
+                    error: $.proxy(function(model, response){
+                        this.trigger("autosave:failure");
+                    }, this)
+                });
+                this.cooldown = null;
+            }, this), 500);
         },
 
         initialize: function(options) {
            this.on("change:name", this.autosave, this);
+            this.get("items").on("add remove change", this.autosave, this);
         },
 
         parse: function(response) {

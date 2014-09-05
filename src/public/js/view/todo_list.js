@@ -8,7 +8,7 @@ define([
     'model/list_item',
     'view/todo_list_item',
     'marionette',
-    'jquery-ui'
+    'jquery-ui',
 ], function ($, _, Backbone, ListModel, ListItemModel, TodoListItem) {
 
     var NoListView = Backbone.Marionette.ItemView.extend({
@@ -35,6 +35,10 @@ define([
             this.$el.addClass("list-group");
         },
 
+        getTemplate: function() {
+            return _.isUndefined(this.collection) ? "script#empty-lists" : "script#todo-list";
+        },
+
         onAddChild: function(childView) {
             childView.on("remove", function(model, selectPrevious) {
                 // focus on the previous to do input
@@ -42,7 +46,6 @@ define([
                     var itemIndex = this.collection.indexOf(model);
                     var previousInput = this.children.findByIndex(itemIndex-1).$el.find("input.todo");
                     previousInput.focus();
-
                     // stupid trick to select the end of the input
                     previousInput.val(previousInput.val());
                 }
@@ -53,10 +56,16 @@ define([
         },
 
         setList: function(listId) {
+            // set the url to current list
             Backbone.history.navigate("/list/" + listId);
 
-            if (!_.isUndefined(this.model))
-                this.model.off("autosave", this.onAutosave);
+            this.render();
+
+            // if we already have an existing model, stop listening for events
+            if (!_.isUndefined(this.model)) {
+                this.model.off("autosave:start", this.onAutosaveStart);
+                this.model.off("autosave:success", this.onAutosaveSuccess);
+            }
 
             this.model = new ListModel({id: listId});
             this.model.once("sync", function() {
@@ -64,12 +73,23 @@ define([
                 this._initialEvents();
                 this.render();
             }, this);
-            this.model.on("autosave", this.onAutosave, this);
+
+            this.model.on("autosave:start", this.onAutosaveStart, this);
+            this.model.on("autosave:success", this.onAutosaveSuccess, this);
             this.model.fetch();
         },
 
-        onAutosave: function() {
-            alert("got saving!");
+        onAutosaveStart: function() {
+            this.$el.find("#autosave-notification")
+                .html('<p class="muted">saving</p>')
+                .fadeIn();
+        },
+
+        onAutosaveSuccess: function() {
+            this.$el.find("#autosave-notification")
+                .html('<p class="text-success">saved!</p>')
+                .delay(1000)
+                .fadeOut();
         },
 
         addTodoItem: function() {
@@ -89,6 +109,7 @@ define([
             switch(event.which) {
                 case 13:    // enter
                     this.addTodoItem();
+                    return false;
                     break;
 
             }

@@ -5,7 +5,7 @@ require.config({
         underscore: '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min',
         backbone: '//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min',
         marionette: '//cdnjs.cloudflare.com/ajax/libs/backbone.marionette/2.1.0/backbone.marionette',
-        bootstrap: '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min'
+        bootstrap: '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min',
     },
     shim: {
         jquery: {
