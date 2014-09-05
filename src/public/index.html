@@ -49,9 +49,11 @@
     </script>
 
     <script id="todo-list-item" type="text/template">
-        <input type="checkbox" name="checked" <%= checked ? "checked" : "" %>>
-        <input type="text" name="value" value="<%= value%>" class="todo">
-        <a id="remove" class="badge small">remove</a>
+        <input type="checkbox" name="checked" <%= checked ? "checked" : "" %> style="float: left">
+        <a id="remove" class="badge small" style="float: right">remove</a>
+        <div style="overflow: hidden">
+            <input type="text" name="value" value="<%= value%>" class="todo">
+        </div>
     </script>
 
     <script id="404" type="text/template">

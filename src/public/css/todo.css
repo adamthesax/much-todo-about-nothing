@@ -32,6 +32,7 @@ header hr {
 
 input[type="text"] {
     background: transparent;
+    width: 100%;
     border: 0px;
     border-bottom: 1px black dotted;
     outline: none;
@@ -39,6 +40,10 @@ input[type="text"] {
 input[type="text"]:focus {
     border-bottom: 1px #428bca dotted;
     color: #428bca;
+}
+
+input.todo {
+    margin: 0px 10px;
 }
 
 .notification {
