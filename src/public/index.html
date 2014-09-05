@@ -19,11 +19,16 @@
         <%= name %>
     </script>
 
+    <script id="todo-list" type="text/template">
+        <ul id="todo-list" class="list-group">
+        </ul>
+        <button id="new" class="btn btn-lg"> <span class="glyphicon glyphicon-plus"></span> todo</button>
+    </script>
+
     <script id="todo-list-item" type="text/template">
-        <div class="checkbox">
-            <input type="checkbox" name="checked" <%= checked ? "checked" : "" %>>
-            <input name="value" value="<%= value%>">
-        </div>
+        <input type="checkbox" name="checked" <%= checked ? "checked" : "" %>>
+        <input type="text" name="value" value="<%= value%>">
+        <div id="remove" class="badge glyphicon glyphicon-remove-sign">&nbsp;</div>
     </script>
 
 

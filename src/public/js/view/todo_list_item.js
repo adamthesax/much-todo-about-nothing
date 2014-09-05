@@ -12,7 +12,10 @@ define([
         tagName: "li",
 
         events: {
-            "change" : "onChange"
+            "change" : "onChange",
+            "click #remove" : function() {
+                this.trigger("remove", this.model);
+            }
         },
 
         onRender: function() {

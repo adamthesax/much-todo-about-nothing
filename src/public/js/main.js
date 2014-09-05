@@ -1,6 +1,7 @@
 require.config({
     paths: {
         jquery: '//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min',
+        'jquery-ui': '//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min',
         underscore: '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min',
         backbone: '//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min',
         marionette: '//cdnjs.cloudflare.com/ajax/libs/backbone.marionette/2.1.0/backbone.marionette',
@@ -32,7 +33,13 @@ require.config({
             deps: [
                 'jquery'
             ]
+        },
+        'jquery-ui': {
+            deps: [
+                'jquery'
+            ]
         }
+
     },
     packages: [
 
