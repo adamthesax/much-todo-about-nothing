@@ -10,35 +10,43 @@ define([
     var List = Backbone.Model.extend({
         urlRoot: '/api/list',
         defaults: {
-            name: "My New List",
-            items: new Backbone.Collection([new ListItemModel()])
+            name: "Untitled List",
+            items: new Backbone.Collection()
         },
 
-        autosave: function() {
-            if (this.cooldown) clearTimeout(this.cooldown);
-
-            this.cooldown = setTimeout($.proxy(function() {   //calls click event after a certain time
-                this.trigger("autosave:start");
-                this.save(this.attributes, {
-                    success: $.proxy(function(model, response){
-                        this.trigger("autosave:success");
-                    }, this),
-                    error: $.proxy(function(model, response){
-                        this.trigger("autosave:failure");
-                    }, this)
-                });
-                this.cooldown = null;
-            }, this), 500);
+        autosave: function(a, b, c) {
+            this.trigger("autosave:start");
+            this.save(this.attributes, {
+                success: $.proxy(function(model, response){
+                    this.trigger("autosave:success");
+                }, this),
+                error: $.proxy(function(model, response){
+                    this.trigger("autosave:failure");
+                }, this)
+            });
         },
 
         initialize: function(options) {
            this.on("change:name", this.autosave, this);
-            this.get("items").on("add remove change", this.autosave, this);
+            if (this.has("items")) {
+                this.get("items").on("remove change", this.autosave, this);
+            }
         },
 
+
         parse: function(response) {
-            response.items = new Backbone.Collection(response.items);
-            response.items.on("add remove change", this.autosave, this);
+            // if we don't have items (aka we are parsing without defaults)
+            if (!this.has("items")) {
+               this.set("items", new Backbone.Collection(response.items));
+               this.get("items").on("remove change", this.autosave, this);
+            // otherwise if this is the first data set we are getting back
+            } else if (this.get("items").length == 0)  {
+               // load up the data
+               this.get("items").reset(response.items);
+            }
+            // remove the items from the response for the rest of the chain
+            delete response.items;
+
             return response;
         }
     })
