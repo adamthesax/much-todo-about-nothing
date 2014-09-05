@@ -3,23 +3,26 @@
 define([
     'jquery',
     'underscore',
-    'backbone'
-], function ($, _, Backbone)  {
+    'backbone',
+    'layout'
+], function ($, _, Backbone, layout)  {
 
     var Router = Backbone.Router.extend({
 
-        initialize: function() {
-            Backbone.history.start();
-        },
-
         routes: {
-            "" : "index"
+            "" : "index",
+            "list/:id" : "showList",
+            "*404" : "show404"
         },
 
         index: function() {
-            $("body").html("hello!");
-        }
+        },
 
+        showList: function(id) {
+        },
+
+        show404: function() {
+        }
     });
 
     return Router;
