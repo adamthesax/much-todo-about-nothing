@@ -6,9 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>much todo about nothing</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/todo.css">
 </head>
 <body>
-    much todo about nothing
-    <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.js" data-main="js/main"></script>
+    <script id="list-selector" type="text/template">
+        <header>My Lists</header>
+        <ul id="list-selector-list" class="list-group">
+        </ul>
+    </script>
+
+    <script id="list-selector-item" type="text/template">
+       <%= name %>
+    </script>
+
+    <div id="sidebar">
+    </div>
+
+    <div>
+    <div id="content">
+        content goes here
+    </div>
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.js" data-main="/js/main"></script>
 </body>
 </html>

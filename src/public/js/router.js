@@ -4,8 +4,9 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'layout'
-], function ($, _, Backbone, layout)  {
+    'view/list_selector',
+    'collection/lists'
+], function ($, _, Backbone, ListSelectorView, ListsCollection)  {
 
     var Router = Backbone.Router.extend({
 
@@ -16,6 +17,12 @@ define([
         },
 
         index: function() {
+            var lists = new ListsCollection();
+            new ListSelectorView({
+                el: "#sidebar",
+                collection: lists
+            }).render();
+            lists.fetch();
         },
 
         showList: function(id) {

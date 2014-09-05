@@ -16,5 +16,5 @@ define([
         }
     });
 
-    return new Layout();
+    return new Layout().render();
 });
