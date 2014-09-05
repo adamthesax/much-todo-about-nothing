@@ -10,7 +10,7 @@ define([
     var Lists = Backbone.Collection.extend({
         url: '/api/list',
         model: ListModel
-    })
+    });
 
     return Lists;
 

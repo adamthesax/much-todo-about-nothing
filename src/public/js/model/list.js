@@ -44,7 +44,7 @@ define([
 
             return response;
         }
-    })
+    });
 
     return List;
 

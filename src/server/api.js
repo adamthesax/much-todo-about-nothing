@@ -33,7 +33,7 @@ api.post('/list', function (req, res) {
     // create a new id
     list.id = uuid.v4();
     // save it to memory
-    lists.push(list)
+    lists.push(list);
 
     // flush what's in memory to disk
     save();
@@ -50,12 +50,12 @@ api.put('/list/:id/', function (req, res) {
     // if we can't find it throw a 404
     res.setHeader('Content-Type', 'application/json');
     if (_.isUndefined(list)) {
-        res.status(404).send({"error": "cannot find list " + req.params.id})
+        res.status(404).send({"error": "cannot find list " + req.params.id});
         return;
     }
 
     // update the list in memory with the body
-    _.extend(list, req.body)
+    _.extend(list, req.body);
 
     // flush the lists to disk
     save();
@@ -69,7 +69,7 @@ api.get('/list/:id', function (req, res) {
     var list = _.findWhere(lists, {id: req.params.id});
 
     if (_.isUndefined(list)) {
-        res.status(404).send({"error": "cannot find list " + req.params.id})
+        res.status(404).send({"error": "cannot find list " + req.params.id});
         return;
     }
 
@@ -81,7 +81,7 @@ api.delete('/list/:id', function (req, res) {
     var list = _.findWhere(lists, {id: req.params.id});
 
     if (_.isUndefined(list)) {
-        res.status(404).send({"error": "cannot find list " + req.params.id})
+        res.status(404).send({"error": "cannot find list " + req.params.id});
         return;
     }
 

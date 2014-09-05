@@ -11,7 +11,7 @@ define([
             value: "",
             checked: false
         }
-    })
+    });
 
     return ListItem;
 

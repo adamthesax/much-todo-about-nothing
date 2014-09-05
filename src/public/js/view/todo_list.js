@@ -99,7 +99,7 @@ define([
         },
 
         selectPreviousItem: function(item) {
-            var prev = item || $(document.activeElement).parents('li').prev().find('input[type="text"]')
+            var prev = item || $(document.activeElement).parents('li').prev().find('input[type="text"]');
 
             if (prev.length > 0) {
                 prev.focus();
@@ -110,7 +110,7 @@ define([
         },
 
         selectNextItem: function(item) {
-            var next = item || $(document.activeElement).parents('li').next().find('input[type="text"]')
+            var next = item || $(document.activeElement).parents('li').next().find('input[type="text"]');
 
             if (next.length > 0) {
                 next.focus();

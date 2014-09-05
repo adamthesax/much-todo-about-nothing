@@ -34,7 +34,7 @@ define([
             switch(event.which) {
                 case 46: // delete
                 case 8: // backspace
-                    if (event.target.value.length == 0) {
+                    if (event.target.value.length === 0) {
                         this.trigger("remove", this.model, true);
                         return false;
                     }

@@ -21,7 +21,7 @@ define([
                 this.trigger("select", this.model.get("id"));
             }
         }
-    })
+    });
 
     var ListSelector = Backbone.Marionette.CompositeView.extend({
         template: "script#list-selector",
